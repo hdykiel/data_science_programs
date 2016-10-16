@@ -1,0 +1,32 @@
+---
+title: "Universities with Data Science Masters Programs"
+author: "Hadrien Dykiel"
+date: "October 16, 2016"
+output: html_document
+---
+
+```{r}
+#Load required packages
+library(leaflet)
+
+#Create map
+map <- (addTiles(leaflet()))
+
+#Universities with Data Science programs
+name <- c("<a href='https://www.univ-paris5.fr/eng'>Paris Decartes</a>"
+          ,"<a href='http://www.em-dmkm.eu/'>Université Pierre et Marie Curie</a>"
+          ,"<a href='http://www.telecom-paristech.fr/formation-continue/masteres-specialises/big-data/points-forts.html'>Paris Telecom</a>"
+          ,"<a href='http://www.essec.edu/en/program/mscs/msc-data-sciences-business-analytics/'>Essec</a>"
+          )
+
+lat <- c(48.851251, 48.8471036, 48.8262943, 49.03353)
+lng <- c(2.340761, 2.3553103, 2.3442301, 2.0746404)
+df <- data.frame(name, lat, lng)
+
+#Add markers
+map <- addMarkers(map, df$lng, df$lat, popup = df$name, clusterOptions = markerClusterOptions())
+
+#Print map
+map
+```
+
